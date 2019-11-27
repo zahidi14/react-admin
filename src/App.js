@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Admin,  Resource} from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
+import {dokterList, DokterEdit, DokterCreate} from './Component/dokter';
+import { PasienList, PasienEdit, PasienCreate } from './Component/pasien';
+import { PemeriksaanList, PemeriksaanEdit, PemeriksaanCreate } from './Component/pemeriksaan';
+import { PendaftaranList, PendaftaranEdit, PendaftaranCreate } from './Component/pendaftaran';
+import { PersonAdd, People } from '@material-ui/icons';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const dataProvider = jsonServerProvider('https://my-json-server.typicode.com/zahidi14/jsonTest/');
+const App = () => 
+<Admin dataProvider={dataProvider}>
+  <Resource name="dokter" list={dokterList} edit={DokterEdit} create={DokterCreate} options={{label: 'Dokter'}}/>
+  <Resource name="pasien" list={PasienList} edit={PasienEdit} create={PasienCreate} options={{label: 'Pasien'}} icon={People}/>
+  <Resource name="pendaftaran" list={PendaftaranList} edit={PendaftaranEdit} create={PendaftaranCreate}  options={{label: 'Pendaftaran'}} icon={PersonAdd}/>
+  <Resource name="pemeriksaan" list={PemeriksaanList} edit={PemeriksaanEdit} create={PemeriksaanCreate}  options={{label: 'Pemeriksaan'}} /* icon={AssignmentTurnedInIcon} *//>
+
+</Admin>
 
 export default App;
